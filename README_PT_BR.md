@@ -4,7 +4,7 @@ Go Rem é um bot do Discord construído em Go que interage com os usuários de m
 
 [Readme em Inglês](README.md)
 
-[![en](https://img.shields.io/badge/lang-en-red.svg)](README.md)
+[![en](https://img.shields.io/badge/lang-en-green.svg)](README.md)
 [![pt-br](https://img.shields.io/badge/lang-pt--br-green.svg)](README_PT_BR.md)
 
 ## Features
