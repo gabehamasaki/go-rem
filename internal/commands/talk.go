@@ -43,7 +43,9 @@ func (t *Talk) Handle(s *discordgo.Session, m *discordgo.MessageCreate) {
 	ctx, cancel := context.WithCancel(context.Background())
 	defer cancel()
 
-	t.setTypingStatus(s, m.ChannelID)
+	if err := s.ChannelTyping(m.ChannelID, discordgo.WithContext(ctx)); err != nil {
+		log.Printf("Error setting typing status: %v", err)
+	}
 
 	log.Printf("Received message from %s\n", m.Author.Username)
 
@@ -87,12 +89,6 @@ func (t *Talk) extractPrompt(m *discordgo.MessageCreate) string {
 		return ""
 	}
 	return strings.Join(messages[1:], " ")
-}
-
-func (t *Talk) setTypingStatus(s *discordgo.Session, channelID string) {
-	if err := s.ChannelTyping(channelID); err != nil {
-		log.Printf("Error setting typing status: %v", err)
-	}
 }
 
 func (t *Talk) getResponse(ctx context.Context, prompt string) (string, error) {
